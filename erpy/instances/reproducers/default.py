@@ -25,7 +25,9 @@ class DefaultReproducer(Reproducer):
             # Create genome
             genome_id = self.next_genome_id
             genome = self.config.genome_config.genome.generate(config=self.config.genome_config,
-                                                               genome_id=genome_id)
+                                                               genome_id=genome_id,
+                                                               args=None,
+                                                               kwargs=None)
 
             # Add genome to population
             population.genomes[genome_id] = genome

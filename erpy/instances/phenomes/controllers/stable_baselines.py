@@ -34,8 +34,6 @@ class SBController(Controller):
 
     def _initialise_model(self, environment: Environment) -> None:
         if self.model is None:
-            if self.controller_specification.path_to_tensorboard_logs is None:
-                self.controller_specification.path_to_tensorboard_logs = f"/tmp/erpy/runs/{wandb.run.id}/"
             self.model = self.controller_specification.algorithm(
                 env=environment,
                 verbose=1,
@@ -63,7 +61,7 @@ class SBController(Controller):
         return actions
 
     def predict(self, observations: Union[np.ndarray, Dict[str, np.ndarray]], *args, **kwargs) -> Tuple[
-        np.ndarray, Optional[np.ndarray]]:
+                np.ndarray, Optional[np.ndarray]]:
         return self.model.predict(observation=observations, *args, **kwargs)
 
     def save(self, path: str) -> None:

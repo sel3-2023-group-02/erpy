@@ -9,6 +9,8 @@ from erpy import random_state
 
 
 class Parameter(metaclass=abc.ABCMeta):
+    _label: str = ""
+
     def __init__(self, value: T) -> None:
         self._value = value
 
@@ -29,6 +31,14 @@ class Parameter(metaclass=abc.ABCMeta):
 
     def set_random_value(self) -> None:
         raise NotImplementedError
+
+    @property
+    def label(self) -> str:
+        return self._label
+
+    @label.setter
+    def label(self, label) -> None:
+        self._label = label
 
 
 class FixedParameter(Parameter):
@@ -68,6 +78,14 @@ class SynchronizedParameter(FixedParameter):
     @value.setter
     def value(self, value) -> None:
         raise TypeError("Cannot set the value of a SynchronizedParameter directly.")
+
+    @property
+    def label(self) -> str:
+        return self._linked_parameter.label
+
+    @label.setter
+    def label(self, label) -> None:
+        self._linked_parameter.label = label
 
 
 class ContinuousParameter(Parameter):

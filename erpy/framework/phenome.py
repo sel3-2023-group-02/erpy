@@ -108,5 +108,5 @@ class Controller(Phenome, metaclass=abc.ABCMeta):
         np.ndarray, Optional[np.ndarray]]:
         return self(observations=observations, *args, **kwargs), None
 
-    def learn(self, total_timesteps: int, callback: Union[evaluator.EvaluationCallback, BaseCallback]) -> None:
+    def learn(self, total_timesteps: int, callback: Union[evaluator.EvaluationCallback, BaseCallback, None]) -> None:
         pass
